@@ -16,7 +16,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     private final Map<String, Employee> employees = new HashMap<>();
 
     @Override
-    public Employee addEmployee(String firstName, String lastName) {
+    public Employee addEmployee(String firstName, String lastName, Integer salary, Integer department) {
         String employeeKey = getEmployeeKey(firstName, lastName);
         if (employees.containsKey(employeeKey)) {
             throw new EmployeeAlreadyAdded("Сотрудник уже есть в стиске!");
@@ -24,7 +24,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         if (employees.size() == EMPLOYEES_STORAGE_SIZE) {
             throw new ArrayIsFull("Список заполнен!");
         }
-        employees.put(employeeKey, new Employee(firstName, lastName));
+        employees.put(employeeKey, new Employee(firstName, lastName, salary, department));
         return employees.get(employeeKey);
     }
 
